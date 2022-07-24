@@ -69,7 +69,7 @@ module.exports = class BetterReplies extends Plugin {
     }, true);
 
     inject('brep-reply-mention-toggle', ChannelReply, 'default', (_, res) => {
-      const tooltip = findInReactTree(res, n => n.disableTooltipPointerEvents);
+      const tooltip = findInReactTree(res, n => typeof n.children === 'function' && n.text && n.color === 'primary'); // Some random stuff to make sure it's the right thing
       const renderer = tooltip.children;
       tooltip.children = (e) => {
         const res = renderer(e);
